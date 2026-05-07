@@ -2,12 +2,6 @@
 /config/*
 !/config/.gitkeep
 
-# Ignore processing and failed raw files to avoid syncing intermediate states
-/raw/processing/*
-!/raw/processing/.gitkeep
-/raw/inbox/*
-!/raw/inbox/.gitkeep
-
 # Ignore environment variables
 .env
 .env.local
