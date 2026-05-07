@@ -40,3 +40,19 @@ Always append your actions to your specific log file based on your role and date
 ```powershell
 Add-Content -Path "logs\ingester\2026-05-08_agent01.md" -Value "- [10:00] Ingested TargetDocument.pdf"
 ```
+
+### D. UTF-8 & Thai Language Handling (CRITICAL)
+To prevent Thai character corruption (Mojibake), always enforce UTF-8 encoding in your scripts.
+
+**Python Example:**
+```python
+with open("file.md", "r", encoding="utf-8") as f:
+    content = f.read()
+```
+
+**PowerShell Example:**
+```powershell
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
+Get-Content -Path "file.md" -Encoding UTF8
+```

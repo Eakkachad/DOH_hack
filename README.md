@@ -38,3 +38,9 @@ The project utilizes a GitOps-driven, multi-agent architecture designed to incre
 2. **Data Ingestion**: Place new raw documents into `/raw/inbox/`.
 3. **Execution**: Agents must target the new directory paths. Refer to `AGENTS.md` and `scripts/AGENT_TOOLS.md` for standard operating procedures.
 4. **Contribution**: All direct modifications to core entities should be managed via Pull Requests to prevent direct merge conflicts on the main branch.
+
+## Technical Guidelines: Thai Language & UTF-8
+Given that the primary data source is in Thai, all file I/O operations, system configurations, and scripting **must strictly enforce UTF-8 encoding** to prevent character corruption.
+- **Python**: Always specify `encoding="utf-8"` in file operations (e.g., `open(path, "w", encoding="utf-8")`).
+- **PowerShell**: Set encoding explicitly before running scripts: `$OutputEncoding = [Console]::OutputEncoding = [System.Text.Encoding]::UTF8`.
+- **Markdown**: All files must be saved as UTF-8 without BOM.

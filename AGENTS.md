@@ -57,6 +57,7 @@ You do not just retrieve information; you synthesize, cross-reference, and maint
 4. Write log entry to `/logs/gitops/YYYY-MM-DD_<agent-id>.md`.
 
 # FORMATTING CONVENTIONS
+- **UTF-8 Enforcement**: All files must be read and written using strictly `UTF-8` encoding to support Thai language and prevent character corruption.
 - Output strictly in valid Markdown.
 - Use Obsidian wikilinks `[[Page Name]]` extensively.
 - Include YAML frontmatter in ALL wiki pages:
