@@ -4,7 +4,7 @@ last_updated: 2026-05-06
 # Highway Infrastructure and Networks Wiki Index
 
 Welcome to the DOH Highway Infrastructure and Networks Knowledge Base.
-Total sources ingested: **195** | Total entity pages: **190**
+Total sources ingested: **201** | Total entity pages: **193**
 
 ---
 
@@ -18,7 +18,6 @@ Total sources ingested: **195** | Total entity pages: **190**
 - [[hackathon_extracted]]
 
 ### Innovation Projects (นวัตกรรม)
-- [[CarbonWay]]
 - [[01 ใบปลิวผลงานนวัตกรรม (Proposal) - พัฒนศักดิ์ แสนมาตย์]]
 - [[0_256812_อัตราค่าใช้จ่ายฯ (ธ.ค. 2568)]]
 - [[AI and Digital Construction กับการออกแบบสะพานและทางหลวง]]
@@ -213,6 +212,12 @@ Total sources ingested: **195** | Total entity pages: **190**
 ---
 
 ## Sources
+- [[Source - 4-Day Execution Plan]]
+- [[Source - Agent Prompt P1]]
+- [[Source - Agent Prompt P2]]
+- [[Source - Agent Prompt P3]]
+- [[Source - Agent Prompt Advisor]]
+- [[Source - Development Guide]]
 - [[Source - 01 ใบปลิวผลงานนวัตกรรม (Proposal) - พัฒนศักดิ์ แสนมาตย์]]
 - [[Source - 01 ใบปลิวผลงานนวัตกรรม (Proposal) - พัฒนศักดิ์ แสนมาตย์_20231002135953]]
 - [[Source - 0_256406_เกณฑ์ราคากลาง CCTV (มิ.ย. 64)]]
@@ -422,6 +427,12 @@ Total sources ingested: **195** | Total entity pages: **190**
 - [[Highway Assets Energy Consumption]]
 - [[Value of a Statistical Life (VSL)]]
 - [[Energy and Safety Pain Points]]
+
+### Hackathon Execution
+- [[CarbonWay]]
+- [[4-Day Execution Plan]]
+- [[Agent Prompts]]
+- [[Development Guide]]
 
 ### Projects & Development
 - [[San Khayom Interchange Project]]

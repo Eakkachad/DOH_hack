@@ -313,3 +313,12 @@ Future revenue: 8.85M - 14.75M THB/year
 
 > [!NOTE]
 > These are rough estimates for the pitch. The POC would use real data for accurate calculations. Even at conservative estimates, the self-funding loop creates meaningful capital that COMPOUNDS over time.
+
+---
+
+## Implementation
+
+The 4-day build sprint is documented in:
+- [[4-Day Execution Plan]] — master plan with daily tasks, JSON schemas, and formulas
+- [[Agent Prompts]] — self-contained AI agent instructions for each team member
+- [[Development Guide]] — team handbook with folder map, startup commands, and sync schedule
