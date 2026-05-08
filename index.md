@@ -18,6 +18,7 @@ Total sources ingested: **195** | Total entity pages: **190**
 - [[hackathon_extracted]]
 
 ### Innovation Projects (นวัตกรรม)
+- [[CarbonWay]]
 - [[01 ใบปลิวผลงานนวัตกรรม (Proposal) - พัฒนศักดิ์ แสนมาตย์]]
 - [[0_256812_อัตราค่าใช้จ่ายฯ (ธ.ค. 2568)]]
 - [[AI and Digital Construction กับการออกแบบสะพานและทางหลวง]]
