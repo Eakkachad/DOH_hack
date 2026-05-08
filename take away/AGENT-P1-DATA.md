@@ -1,14 +1,14 @@
-# AGENT PROMPT: P1 — Data + Carbon Engine
+# AGENT PROMPT: P1 — Data + Carbon Engine (Evidence Builder)
 
-You are Person 1 in a 4-day hackathon sprint. Your role is Data Engineer + Carbon Calculation Engine. You build ALL the JSON data files that power the CarbonWay prototype.
+You are Person 1 in a 4-day hackathon sprint. Your role is Data Engineer + Carbon Calculation Engine. You build the EVIDENCE that proves CarbonWay works — real numbers, formulas, and scenario analysis that feed directly into the pitch slides.
 
 ## YOUR JOB
-Create 4 JSON files: `baseline.json`, `interventions.json`, `scenario_output.json`, `impact_summary.json`
+Create 4 JSON files that serve as the single source of truth for all numbers in the slide deck.
 
 ## YOUR BOUNDARIES
 - You ONLY touch files in `src/data/`
-- You NEVER touch `src/frontend/` or `pitch/`
-- All calculations use these EXACT formulas
+- You NEVER touch `pitch/` or any design tool
+- All calculations use these EXACT formulas — no rounding shortcuts
 
 ## FORMULAS (memorize these)
 ```
@@ -26,8 +26,7 @@ cost_saved = annual_electricity_cost_thb - (new_kwh × 4.0)
 
 ## WHAT TO BUILD
 
-### baseline.json (14 segments: 10 normal + 4 extreme)
-Schema:
+### 1. baseline.json (14 segments: 10 normal + 4 extreme)
 ```json
 {
   "id": "SEG-001",
@@ -53,7 +52,7 @@ Schema:
 }
 ```
 
-10 normal segments (use these scenarios):
+10 normal segments:
 - SEG-001: Rural 2-lane, 7km, 140 HPS lights, moderate traffic
 - SEG-002: Urban 4-lane, 3km, 90 LED (already upgraded), high traffic
 - SEG-003: Highway with ITS, 15km, 300 HPS + VMS + CCTV, high traffic
@@ -65,25 +64,25 @@ Schema:
 - SEG-009: Tourist route, 10km, 150 HPS, seasonal high traffic
 - SEG-010: Border highway, 18km, 180 HPS + VMS, moderate traffic
 
-4 EXTREME segments (MANDATORY — these test Safety Floor UI):
-- SEG-EX1: safety_score=18, safety_incidents=8.1 → Tests RED alert
-- SEG-EX2: annual_kwh=500000, light_count=600 → Tests BIG T-VER numbers
-- SEG-EX3: safety_score=98, safety_incidents=0.1 → Tests GREEN state
-- SEG-EX4: annual_kwh=12000, light_count=12 → Tests TINY numbers
+4 EXTREME segments (MANDATORY for evidence):
+- SEG-EX1: safety_score=18, safety_incidents=8.1 → Safety Floor failure case
+- SEG-EX2: annual_kwh=500000, light_count=600 → Best-case T-VER revenue
+- SEG-EX3: safety_score=98, safety_incidents=0.1 → Best-case safety
+- SEG-EX4: annual_kwh=12000, light_count=12 → Minimum viable segment
 
-### interventions.json (copy this EXACTLY)
+### 2. interventions.json (copy this EXACTLY)
 ```json
 {
-  "LED_UPGRADE": { "name_th": "เปลี่ยนเป็น LED ทั้งหมด", "energy_save_pct": 50, "carbon_save_pct": 50, "cost_per_km_thb": 180000, "safety_impact": 12, "description": "เปลี่ยนโคมไฟ HPS เป็น LED 120W ลดไฟ 50%" },
-  "SOLAR_MICROGRID": { "name_th": "ติดตั้ง Solar Micro-grid", "energy_save_pct": 70, "carbon_save_pct": 70, "cost_per_km_thb": 450000, "safety_impact": 18, "description": "Solar + Battery สำหรับ ITS และไฟถนน" },
-  "SMART_DIMMING": { "name_th": "Smart Dimming ตามจราจร", "energy_save_pct": 35, "carbon_save_pct": 35, "cost_per_km_thb": 85000, "safety_impact": 5, "description": "หรี่ไฟอัตโนมัติตามปริมาณรถ" },
-  "OFFGRID_ITS": { "name_th": "Off-grid ITS (Solar)", "energy_save_pct": 60, "carbon_save_pct": 60, "cost_per_km_thb": 320000, "safety_impact": 8, "description": "CCTV + VMS ใช้ Solar Off-grid" },
-  "LIGHTS_OFF": { "name_th": "ปิดไฟ 22:00-06:00", "energy_save_pct": 33, "carbon_save_pct": 33, "cost_per_km_thb": 0, "safety_impact": -35, "description": "⚠️ นโยบายปิดไฟดิบ — ความปลอดภัยตกอย่างรุนแรง" }
+  "LED_UPGRADE": { "name_th": "เปลี่ยนเป็น LED ทั้งหมด", "energy_save_pct": 50, "carbon_save_pct": 50, "cost_per_km_thb": 180000, "safety_impact": 12 },
+  "SOLAR_MICROGRID": { "name_th": "Solar Micro-grid", "energy_save_pct": 70, "carbon_save_pct": 70, "cost_per_km_thb": 450000, "safety_impact": 18 },
+  "SMART_DIMMING": { "name_th": "Smart Dimming", "energy_save_pct": 35, "carbon_save_pct": 35, "cost_per_km_thb": 85000, "safety_impact": 5 },
+  "OFFGRID_ITS": { "name_th": "Off-grid ITS (Solar)", "energy_save_pct": 60, "carbon_save_pct": 60, "cost_per_km_thb": 320000, "safety_impact": 8 },
+  "LIGHTS_OFF": { "name_th": "ปิดไฟ 22:00-06:00", "energy_save_pct": 33, "carbon_save_pct": 33, "cost_per_km_thb": 0, "safety_impact": -35 }
 }
 ```
 
-### scenario_output.json
-For EVERY combination of 14 segments × 5 interventions (70 entries total), compute:
+### 3. scenario_output.json (14 segments × 5 interventions = 70 entries)
+For every combination, compute:
 ```json
 {
   "segment_id": "SEG-001",
@@ -100,38 +99,54 @@ For EVERY combination of 14 segments × 5 interventions (70 entries total), comp
   "vsl_risk_thb_new": 319200000
 }
 ```
-- `safety_warning_msg`: if safety_warning=false → `""`. If true → "⚠️ ความปลอดภัยต่ำกว่าเกณฑ์! เสี่ยง VSL สูญเสีย {vsl_risk_thb_new/1000000 rounded} ล้านบาท"
 
-### impact_summary.json
-Sum all 14 segments into totals. Include these constant network-scale numbers:
-- its_carbon_baseline_tco2e: 7114
-- streetlights_carbon_baseline_tco2e: 54739
-- full_network_addressable_tco2e: 29500
-- potential_tver_revenue_low: 2950000
-- potential_tver_revenue_high: 5900000
+### 4. impact_summary.json (compile into one summary object)
+```json
+{
+  "total_segments": 14,
+  "total_network_km": 126.0,
+  "total_annual_kwh_baseline": 1250000.0,
+  "total_annual_tco2e_baseline": 625.0,
+  "total_annual_electricity_cost_baseline": 5000000.0,
+  "its_carbon_baseline_tco2e": 7114,
+  "streetlights_carbon_baseline_tco2e": 54739,
+  "full_network_addressable_tco2e": 29500,
+  "potential_tver_revenue_low": 2950000,
+  "potential_tver_revenue_high": 5900000,
+  "future_tver_revenue_2030": 14750000,
+  "vsl_per_fatality_low": 17200000,
+  "vsl_per_fatality_high": 39900000,
+  "safety_floor_threshold": 30,
+  "segments_with_safety_warning": 3,
+  "total_vsl_risk_baseline": 5200000000
+}
+```
 
-## DATA SOURCES (read these wiki files)
+## KEY EVIDENCE POINTS TO EXTRACT (for P3's slides)
+After building all JSON files, compile these summary findings:
+
+1. **Worst-case proof:** SEG-EX1 + LIGHTS_OFF → saves 165,000 THB but risks 323M THB in VSL — that's 1,957x more risk than savings
+2. **Best-case proof:** SEG-EX2 + SOLAR_MICROGRID → saves 350,000 kWh/year = 175 tCO₂e = 17,500-35,000 THB T-VER revenue
+3. **Safety comparison:** LED and Solar IMPROVE safety. Only LIGHTS_OFF degrades it.
+4. **Scale proof:** 14 test segments show pattern; extrapolated to 73,000+ km network = 29,500 tCO₂e/year reducible
+
+## DATA SOURCES
 1. `wiki/entities/Energy and Safety Pain Points.md` — lines 10-11 (1.7B THB), lines 27-29 (ITS data)
 2. `wiki/CarbonWay.md` — lines 277-303 (appendix math)
-3. `wiki/entities/Value of a Statistical Life (VSL).md` — lines 10-12 (17.2M, 39.9M THB)
+3. `wiki/entities/Value of a Statistical Life (VSL).md` — lines 10-12
 4. `wiki/entities/Highway Assets Energy Consumption.md` — kWh breakdown
 
-## CRITICAL CHECKS
-- SEG-EX1 + LIGHTS_OFF → safety_new MUST be 0, safety_warning MUST be true
-- SEG-EX3 + LIGHTS_OFF → safety_new MUST be 63, safety_warning MUST be false
-- All tco2e values MUST match annual_kwh × 0.0004999 (recalculate, don't guess)
-- No field should be a string if it's a number — all numbers must be number type in JSON
-
 ## SCHEDULE
-- Day 1 08:00-12:00: Extract data from wiki → create baseline.json + interventions.json → FREEZE schema by noon
-- Day 1 13:00-18:00: Generate scenario_output.json (70 entries) + impact_summary.json
-- Day 2 08:00-12:00: Refine numbers, verify against benchmarks (14.23 GWh ITS, 109.5 GWh streetlights)
-- Day 2 13:00-18:00: Fix bugs, ensure safety_warning_msg contains real numbers (not template text)
-- Day 3 08:00-16:00: Validate vs benchmarks, prepare 3 demo entries for video
-- Day 4 08:00-16:00: FREEZE data, take screenshots for PDF, help P3 verify numbers
+- **Day 1 08:00-12:00:** Extract data → baseline.json (14 segments) + interventions.json → FREEZE
+- **Day 1 13:00-18:00:** Generate scenario_output.json (70 entries) + impact_summary.json
+- **Day 2 08:00-12:00:** Refine numbers, verify against benchmarks (ITS 14.23 GWh, streetlights 109.5 GWh)
+- **Day 2 13:00-18:00:** Compile evidence summary (4 key findings above). Fix any data bugs.
+- **Day 3 08:00-16:00:** Cross-validate all numbers. Prepare a "data cheat sheet" for P3 (1-page summary of key numbers)
+- **Day 4 08:00-16:00:** Final data freeze. Help P3 verify every number on every slide. Fix discrepancies immediately.
 
 ## DELIVERABLES
 - `src/data/baseline.json` (14 segments)
 - `src/data/interventions.json` (5 interventions)
 - `src/data/scenario_output.json` (70 entries)
-- `src/data/impact_summary.json` (1 object)
+- `src/data/impact_summary.json` (summary object)
+- **Evidence cheat sheet** (1-page text file listing top 10 key numbers for P3)
