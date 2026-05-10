@@ -1,0 +1,23 @@
+---
+import "../styles/global.css";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#1e40af" />
+    <title>DOH SafeZone - Highway Construction Reporting System</title>
+    <style>
+      @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+      .animate-slideDown { animation: slideDown 0.3s ease-out; }
+      .animate-fadeIn { animation: fadeIn 0.3s ease-out; }
+      .safe-area-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
+    </style>
+  </head>
+  <body class="bg-gray-50 antialiased">
+    <slot />
+  </body>
+</html>
